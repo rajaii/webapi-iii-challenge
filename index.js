@@ -1,27 +1,20 @@
-const express = require('express');
-const server = express();
-const userRouter = require('./users/userRouter.js');
-const postRouter = require('./posts/postRouter.js');
+require('dotenv').config();
 
-server.use(express.json());
-server.use(logger);
-server.use('/api/users', userRouter);
-server.use('/api/posts', postRouter);
+const server = require('./server.js');
 
-function logger(req, res, next) {
- console.log(`${new Date().toISOString()}: ${req.method} to ${req.url} ${req.get('Origin')}`)
- next();
-}
+const port = process.env.PORT || 5000;
 
-server.get('/', (req, res) => {
-    res.status(200).send(
-        '<h1>Hello world from Ali</h1>'
-    )
-})
 
-server.listen(5000, () => {
-    console.log('server listening on port 5000');
+
+
+
+
+
+
+
+server.listen(port, () => {
+    console.log(`server listening on port ${port}`);
 })
 
 
-module.exports = server;
+

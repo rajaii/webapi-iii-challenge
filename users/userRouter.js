@@ -105,7 +105,7 @@ function validateUser(req, res, next) {
     const { name } = req.body
     if(name && req.body) {
         next();
-    } else if (isEmpty(req.body)) {
+    } else if (isEmpty(req.body) || !req.body) {
         res.status(400).json({message: 'missing user data'})
     } else {
         res.status(400).json({message: 'missing user data name field'})
@@ -113,11 +113,7 @@ function validateUser(req, res, next) {
     
 };
 
-/*`validateUser()`
-- `validateUser` validates the `body` on a request to create a new user
-- if the request `body` is missing, cancel the request and respond with status `400` and `{ message: "missing user data" }`
-- if the request `body` is missing the required `name` field, cancel the request and respond with status `400` and `{ message: "missing required name field" }`
-*/
+
 
 function validatePost(req, res, next) {
     function isEmpty(obj) {
@@ -128,7 +124,7 @@ function validatePost(req, res, next) {
         return true;
     }
     
-    if (isEmpty(req.body)) {
+    if (isEmpty(req.body) || !req.body) {
         res.status(404).json({message: 'missing post data'});
     } else if (!req.body.text) {
         res.status(400).json({message: 'missing post text field'});
@@ -138,11 +134,6 @@ function validatePost(req, res, next) {
         next();
     }
 };
-/*
-`validatePost()`
-  - `validatePost` validates the `body` on a request to create a new post
-  - if the request `body` is missing, cancel the request and respond with status `400` and `{ message: "missing post data" }`
-  - if the request `body` is missing the required `text` field, cancel the request and respond with status `400` and `{ message: "missing required text field" }`
-*/
+
 
 module.exports = router;
